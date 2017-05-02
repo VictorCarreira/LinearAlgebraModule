@@ -1,8 +1,13 @@
 MODULE LAmodule
 
+IMPLICIT NONE
+
   CONTAINS
 
-    SUBROUTINE Matricial_Product
+    SUBROUTINE Matricial_Product (A,B,E)
+      REAL(KIND=8), INTENT(IN), DIMENSION(:,:)::A, B
+      REAL(KIND=8), INTENT(OUT), DIMENSION(:,:)::E
+
       E = MATMUL(A,B)
 
       !DO i=1,4
