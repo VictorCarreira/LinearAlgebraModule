@@ -3,16 +3,16 @@ PROGRAM Main
 
 
 !!!!!!!!!!!!!!!!!!!!!!MODULES!!!!!!!!!!!!!!!!!!!!!!!
-  USE variables
-  USE Read_data
+  USE variables, ONLY: A, B, E
+  USE Open_Read_data
   USE LAmodule
 
 
   IMPLICIT NONE
 
 !!!!!!!!!!!!!!!!!!!!!!!PACKAGES!!!!!!!!!!!!!!!!!!!!
-  CALL Read
-  CALL Matricial_Product
+  CALL OpenRead (fid, ierr)
+  CALL Matricial_Product (A,B,E)
 
 
     WRITE(*,*)"E=", E
