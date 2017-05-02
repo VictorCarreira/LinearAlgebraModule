@@ -1,9 +1,9 @@
 MODULE variables
   !!!!!!!!!!!!!!!!!!!Variáveis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      IMPLICIT NONE
+
 
 CONTAINS
-
+IMPLICIT NONE
       REAL(KIND=8), ALLOCATABLE, DIMENSION(:,:)::A
       REAL(KIND=8), ALLOCATABLE, DIMENSION(:,:)::B
       REAL(KIND=8), ALLOCATABLE, DIMENSION(:,:)::E
