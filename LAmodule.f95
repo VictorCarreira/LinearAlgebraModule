@@ -1,37 +1,64 @@
-MODULE LAmodule
+PROGRAM LAmodule
 
 IMPLICIT NONE
+!REAL(KIND=8), INTENT(IN), DIMENSION(:,:)::A, B
+!REAL(KIND=8), INTENT(OUT), DIMENSION(:,:)::E
 
   CONTAINS
 
-    SUBROUTINE Matricial_Product (A,B,E)
-      REAL(KIND=8), INTENT(IN), DIMENSION(:,:)::A, B
-      REAL(KIND=8), INTENT(OUT), DIMENSION(:,:)::E
+! Esta subrotina faz a multiplicação de duas matrizes quadradas (A * B)
+!
+! Parâmetros:
+! A e B Matrizes de entrada
+! C Matriz que armazenará o produto de a por b
+! n Dimensão da matriz (apenas matrizes quadradas)
 
-      E = MATMUL(A,B)
+SUBROUTINE produto_matricial (A, B, C, n)
 
-      !DO i=1,4
-      !  DO k=1,5
-      !    C(i,k)=0
-          !DO j=1,3
-          !  C(i,k)=C(i,k)+A(i,j)*B(j,k)
-          !ENDDO
-        !ENDDO
-      !ENDDO
+IMPLICIT NONE
 
+INTEGER :: n, i, j, k
+REAL :: A(n,n), B(n,n), C(n,n)
 
 
-      !DO i=1,m
-      !  DO j=1,m
-      !      C(i,j)=0
-      !    DO k=1,n
-      !      C(i,j)=C(i,j)+A(i,k)*B(k,j)
-      !    ENDDO
-      !  ENDDO
-      !ENDDO
+C=0.0
+  do i=1,n
+    do j=1,n
+      do k=1,n
+        C(i,j) = C(i,j)+A(i,k)∗B(k,j)                                           !Realiza o produto matricial conforme
+      end do
+    end do
+  end do
+
+END SUBROUTINE produto_matricial
 
 
+!Esta subrotina cria a transposta de uma matriz
+!
+!Parâmetros:
+!A Matriz de entrada
+!n Dimensão da matriz (apenas matrizes quadradas)
+!
+!AVISO: A matriz a será modificada no processo
 
-    END SUBROUTINE Matricial_Product
+SUBROUTINE matriz_transposta (At, n)
 
-  END MODULE LAmodule
+IMPLICIT NONE
+
+INTEGER:: n,i,j
+REAL:: At(n,n), temp
+
+  do i=1,n
+    do j=1,n
+      if (i<j) then
+        temp = At(i,j)
+        At(i,j) = At(j,i)                                                         !Troca o índice i com o índice j
+        At(j,i) = temp
+      end if
+    end do
+  end do
+
+END SUBROUTINE matriz_transposta
+
+
+ENDPROGRAM LAmodule
