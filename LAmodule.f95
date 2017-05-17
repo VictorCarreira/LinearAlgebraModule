@@ -13,15 +13,17 @@ IMPLICIT NONE
 ! C Matriz que armazenará o produto de a por b
 ! n Dimensão da matriz (apenas matrizes quadradas)
 
-SUBROUTINE produto_matricial (A, B, C, n)
+SUBROUTINE produto_matricial (A, B, C)
 
 IMPLICIT NONE
 
 INTEGER :: n, i, j, k
-REAL :: A(n,n), B(n,n), C(n,n)
+REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(IN):: A, B
+REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(OUT):: C
 
+n=size(A, dim=1)
 
-C=0.0
+C=0.0                                                                           !zera os elementos da matriz.
   do i=1,n
     do j=1,n
       do k=1,n
