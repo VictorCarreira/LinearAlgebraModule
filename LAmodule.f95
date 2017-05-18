@@ -5,6 +5,29 @@ IMPLICIT NONE
 !REAL(KIND=8), INTENT(OUT), DIMENSION(:,:)::E
 
   CONTAINS
+    ! Esta subrotina faz a soma de duas matrizes quadradas (A + B)
+    ! E armazena o resultado em uma matriz C
+    ! Parâmetros:
+    ! A e B Matrizes de entrada
+    ! C Matriz que armazenará a soma de a e b
+    ! n Dimensão da matriz (apenas matrizes quadradas)
+
+
+SUBROUTINE soma_matricial (A, B, C, n)
+  IMPLICIT NONE
+  INTEGER :: n, i, j, k
+  REAL, DIMENSION(:,:), ALLOCATABLE, INTENT(IN):: A, B
+  REAL, DIMENSION(:,:), ALLOCATABLE, INTENT(OUT):: C
+
+n=size(A, dim=1)! Faz com que n tenha o tamanho de A
+
+  do i = 1, n
+    do j = 1, n
+      C(i,j) = A(i,j) + B(i,j)
+    end do
+  end do
+
+END SUBROUTINE soma_matricial
 
 ! Esta subrotina faz a multiplicação de duas matrizes quadradas (A * B)
 !
@@ -13,27 +36,28 @@ IMPLICIT NONE
 ! C Matriz que armazenará o produto de a por b
 ! n Dimensão da matriz (apenas matrizes quadradas)
 
-SUBROUTINE produto_matricial (A, B, C)
+!pause !Depurador (para a execução do programa desta linha para baixo)
 
-IMPLICIT NONE
+!SUBROUTINE produto_matricial (A, B, C, n) ! Está dando erro!
+!IMPLICIT NONE
+!INTEGER :: n, i, j, k
+!REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(IN):: A, B
+!REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(OUT):: C
 
-INTEGER :: n, i, j, k
-REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(IN):: A, B
-REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(OUT):: C
+!n=size(A, dim=1) ! Diz que a variável n possui tamanho de A.
 
-n=size(A, dim=1)
+!C=0.0                                                                           !zera os elementos da matriz.
+!  do i=1,n
+!    do j=1,n
+!      do k=1,n
+!        C(i,j) = C(i,j) + A(i,k) ∗ B(k,j)                                           !Realiza o produto matricial conforme
+!      end do
+!    end do
+!  end do
 
-C=0.0                                                                           !zera os elementos da matriz.
-  do i=1,n
-    do j=1,n
-      do k=1,n
-        C(i,j) = C(i,j)+A(i,k)∗B(k,j)                                           !Realiza o produto matricial conforme
-      end do
-    end do
-  end do
+!END SUBROUTINE produto_matricial
 
-END SUBROUTINE produto_matricial
-
+!continue !Depurador (continua a execução do programa desta linha para baixo)
 
 !Esta subrotina cria a transposta de uma matriz
 !
@@ -62,5 +86,23 @@ REAL:: At(n,n), temp
 
 END SUBROUTINE matriz_transposta
 
+! Esta subrotina calcula a inversa de uma matriz por eliminação gaussiana
+!
+! Parâmetros:
+! A Matriz de entrada
+! Ainv Matriz que armazenará a inversa
+! n Dimensão da matriz (apenas matrizes quadradas)
+!
+! AVISO: A matriz A será modificada no processo
+
+SUBROUTINE matriz_inversa (A, Ainv, n)
+  IMPLICIT NONE
+  INTEGER :: n
+  REAL, DIMENSION(:,:),ALLOCATABLE, INTENT(IN):: A
+  REAL,  DIMENSION(:,:),ALLOCATABLE, INTENT(OUT):: Ainv  ! Matriz inversa
+  LOGICAL :: invertivel = .true.
+  INTEGER :: i, j, k, l
+  REAL :: m
+  REAL, DIMENSION(n,*2n) :: Aaumentada !Matriz aumentada
 
 ENDPROGRAM LAmodule
